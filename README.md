@@ -93,7 +93,7 @@ You must add the prefix or your command won't work normally.
 - All defined variables by aobScan: `?` (Ex: `{{?PlayerControl_GetData}}`)
 - All defined variables by offsets: `#` (Ex: `{{#ShowGhosts}}`)
 - All defined variables in procedures: `@` (Ex: `{{@readedInt}}`)
-- SetValue Prefix: `{{$customValue}}`
+- SetValue Prefix: `{{$value}}`
 
 #### Example:
 ```json
@@ -161,7 +161,7 @@ You must add the prefix or your command won't work normally.
                   "function": "WriteMemory",
                   "address": "{{#MovementSpeed}}",
                   "type": "float",
-                  "value": "{{$customValue}}"
+                  "value": "{{$value}}"
                 }
               ]
             }
