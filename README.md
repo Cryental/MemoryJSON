@@ -125,7 +125,6 @@ The defined variable will only be available in the same procedures.
     }
   ],
   "trainers": [
-    [
       {
         "tabName": "General",
         "functions": [
@@ -203,7 +202,6 @@ The defined variable will only be available in the same procedures.
           }
         ]
       }
-    ]
   ]
 }
 ```
