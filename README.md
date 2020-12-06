@@ -34,7 +34,8 @@ var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.jso
 // Inject to the Game Process. (Boolean Type)
 trainer.Inject2Game();
 
-// Run pre-processing table. It has all AoBScan data that might be required for running functions. (Boolean Type)
+// Run pre-processing table. It's required to run. (Boolean Type)
+// It can cause some lags and delay if you need to scan AoB. Please use async method in your code. 
 trainer.RunPreProcessing();
 
 // Get Tab
