@@ -54,7 +54,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
 
 ### JSON Scripting Format:
 
-For `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
+For the `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
 
 ```json
 {
