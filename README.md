@@ -40,9 +40,10 @@ var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.amb
 // Inject to the Game Process. (Boolean Type)
 trainer.Inject2Game();
 
-// Run pre-processing table. It's required to run. (Boolean Type)
+// It's required to run with Inject2Game always. 
+// If it returns false, you cannot use any functions.
 // It can cause some lags and delay if you need to scan AoB. Please use async method in your code. 
-trainer.RunPreProcessing();
+trainer.InitEngine();
 
 // Get Tab
 var generalTrainers = trainer.FindTab("General");
@@ -69,7 +70,7 @@ This engine uses AmberJSON as the script format. (*.amber)
 
 For the `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
 
-```json
+```
 {
   "function": "ReadInt",
   "defineName": "readedInt",
@@ -87,10 +88,12 @@ The defined variable will only be available in the same procedures.
 `version` will be FileVersion from properties of the game file. It will allow running if the version is the same, otherwise, it will return an exception. If you don't want to use this feature, use "all" in the field.
 
 #### Prefix:
+You must add the prefix or your command won't work normally.
+
 - All defined variables by aobScan: `?` (Ex: `{{?PlayerControl_GetData}}`)
 - All defined variables by offsets: `#` (Ex: `{{#ShowGhosts}}`)
 - All defined variables in procedures: `@` (Ex: `{{@readedInt}}`)
-- SetValue Prefix: `{{$customValue}}`
+- SetValue Prefix: `{{$value}}`
 
 #### Example:
 ```json
@@ -124,85 +127,83 @@ The defined variable will only be available in the same procedures.
     }
   ],
   "trainers": [
-    [
-      {
-        "tabName": "General",
-        "functions": [
-          {
-            "name": "Show Ghosts",
-            "enabled": {
-              "procedures": [
-                {
-                  "function": "WriteMemory",
-                  "address": "{{#ShowGhosts}}",
-                  "type": "bytes",
-                  "value": "{{?PlayerControl_GetData}}"
-                }
-              ]
-            },
-            "disabled": {
-              "procedures": [
-                {
-                  "function": "WriteMemory",
-                  "address": "{{#ShowGhosts}}",
-                  "type": "bytes",
-                  "value": "{{?PlayerControl_GetData}}"
-                }
-              ]
-            }
+    {
+      "tabName": "General",
+      "functions": [
+        {
+          "name": "Show Ghosts",
+          "enabled": {
+            "procedures": [
+              {
+                "function": "WriteMemory",
+                "address": "{{#ShowGhosts}}",
+                "type": "bytes",
+                "value": "{{?PlayerControl_GetData}}"
+              }
+            ]
           },
-          {
-            "name": "Movement Speed",
-            "setValue": {
-              "procedures": [
-                {
-                  "function": "WriteMemory",
-                  "address": "{{#MovementSpeed}}",
-                  "type": "float",
-                  "value": "{{$customValue}}"
-                }
-              ]
-            }
-          },
-          {
-            "name": "Infinity Kill Range",
-            "enabled": {
-              "procedures": [
-                {
-                  "function": "CreateCodeCave",
-                  "address": "GameAssembly.dll+6EE",
-                  "newBytes": "C7 44 06 10 00 00 80",
-                  "replaceCount": 6,
-                  "size": 4096
-                },
-                {
-                  "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE5",
-                  "type": "bytes",
-                  "value": "72 12"
-                }
-              ]
-            },
-            "disabled": {
-              "procedures": [
-                {
-                  "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE5",
-                  "type": "bytes",
-                  "value": "F3 0F 10 44 86 10 A1"
-                },
-                {
-                  "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE3",
-                  "type": "bytes",
-                  "value": "75 12"
-                }
-              ]
-            }
+          "disabled": {
+            "procedures": [
+              {
+                "function": "WriteMemory",
+                "address": "{{#ShowGhosts}}",
+                "type": "bytes",
+                "value": "{{?PlayerControl_GetData}}"
+              }
+            ]
           }
-        ]
-      }
-    ]
+        },
+        {
+          "name": "Movement Speed",
+          "setValue": {
+            "procedures": [
+              {
+                "function": "WriteMemory",
+                "address": "{{#MovementSpeed}}",
+                "type": "float",
+                "value": "{{$value}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Infinity Kill Range",
+          "enabled": {
+            "procedures": [
+              {
+                "function": "CreateCodeCave",
+                "address": "GameAssembly.dll+6EE",
+                "newBytes": "C7 44 06 10 00 00 80",
+                "replaceCount": 6,
+                "size": 4096
+              },
+              {
+                "function": "WriteMemory",
+                "address": "GameAssembly.dll+6EE5",
+                "type": "bytes",
+                "value": "72 12"
+              }
+            ]
+          },
+          "disabled": {
+            "procedures": [
+              {
+                "function": "WriteMemory",
+                "address": "GameAssembly.dll+6EE5",
+                "type": "bytes",
+                "value": "F3 0F 10 44 86 10 A1"
+              },
+              {
+                "function": "WriteMemory",
+                "address": "GameAssembly.dll+6EE3",
+                "type": "bytes",
+                "value": "75 12"
+              }
+            ]
+          }
+        }
+      ]
+    }
   ]
 }
 ```
