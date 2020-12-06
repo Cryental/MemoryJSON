@@ -6,9 +6,9 @@ This project using the modified Memory.dll as a main I/O engine.
 This library will allow you to create trainers very easily with JSON files, without working on codes.
 
 #### Warning!
-Please do not use this library for multi player games. I created this library to create single player trainers easily. You will get banned if you use it in multi player and it's your own risk.
+Please do not use this library for multi player games. I created this library to create single player trainers easily. You will get banned if you use it in multi player, please use this at your own risk.
 
-Example offsets are all dummy, it won't work in real game.
+Example offsets are all dummy offsets, they won't work in the real game.
 
 This project is under development. Do not use for production.
 
@@ -42,7 +42,7 @@ var generalTrainers = trainer.FindTab("General");
 
 // Get List of Functions
 var functions = generalTrainers.GetAllFunctions();
-// Returns String with boolean, float, int, etc. You can use Enable and Disable for boolean type, and use SetValve for other number types.
+// Returns String with boolean or number. You can use Enable and Disable for boolean type, and use SetValve for the number type.
 var getFunctionType = generalTrainers["Show Ghosts"].GetType(); 
 
 // Use Functions
