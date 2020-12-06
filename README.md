@@ -26,6 +26,17 @@ var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.jso
 // Remote Access with URL, Password, Username and User Password (Http Basic Auth)
 var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password", "username", "userpass");
 
+// Inject to the Game Process. (Boolean Type)
+trainer.Inject2Game();
+
+// Run pre-processing table. It has all AoBScan data that might be required for running functions. (Boolean Type)
+trainer.RunPreProcessing();
+
+// Get List of Functions
+var functions = trainer.GetAllFunctions();
+// Returns String with boolean, float, int, etc. You can use Enable and Disable for boolean type, and use SetValve for other number types.
+var getFunctionType = functions["Show Ghosts"].GetType(); 
+
 trainer.SearchFunction("MovementSpeed").SetValve("1");
 
 trainer.SearchFunction("Show Ghosts").Enable();
