@@ -54,7 +54,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
 
 ### JSON Scripting Format:
 
-For `function` field, it supports almost features from Memory.dll. For read memory functions, you will need to use it like:
+For `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
 
 ```json
 {
@@ -69,7 +69,7 @@ For `function` field, it supports almost features from Memory.dll. For read memo
   "value": "{{readedInt}}"
 }
 ```
-The defined variable will only available in the same procedures.
+The defined variable will only be available in the same procedures.
 
 #### Example:
 ```json
