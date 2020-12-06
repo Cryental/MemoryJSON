@@ -32,13 +32,13 @@ trainer.Inject2Game();
 // Run pre-processing table. It has all AoBScan data that might be required for running functions. (Boolean Type)
 trainer.RunPreProcessing();
 
-// Get List of Functions
-var functions = trainer.GetAllFunctions();
-// Returns String with boolean, float, int, etc. You can use Enable and Disable for boolean type, and use SetValve for other number types.
-var getFunctionType = functions["Show Ghosts"].GetType(); 
-
 // Get Tab
 var generalTrainers = trainer.FindTab("General");
+
+// Get List of Functions
+var functions = generalTrainers.GetAllFunctions();
+// Returns String with boolean, float, int, etc. You can use Enable and Disable for boolean type, and use SetValve for other number types.
+var getFunctionType = generalTrainers["Show Ghosts"].GetType(); 
 
 // Use Functions
 generalTrainers.SearchFunction("Movement Speed").SetValve("1");
