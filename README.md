@@ -10,7 +10,21 @@ This project is under development. Do not use for production.
 ### How to Use:
 ```cs
 var memoryengine = new MemoryJSON.Engine();
+
+// Local Access
 var trainer = memoryengine.CreateTrainerFromFile("among us.json");
+
+// Local Access with Password
+var trainer = memoryengine.CreateTrainerFromFile("among us.json", "password");
+
+// Remote Access with URL
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json");
+
+// Remote Access with URL and Password
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password");
+
+// Remote Access with URL, Password, Username and User Password (Http Basic Auth)
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password", "username", "userpass");
 
 trainer.SearchFunction("MovementSpeed").SetValve("1");
 
