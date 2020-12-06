@@ -17,22 +17,23 @@ This project is under development. Do not use for production.
 var memoryengine = new MemoryJSON.Engine();
 
 // Encrypt AmberJSON file
-memoryengine.EncryptFile("among us.json", "password");
+memoryengine.EncryptFile("among us.amber", "among us_output.amber", "password");
+
 
 // Local Access
-var trainer = memoryengine.CreateTrainerFromFile("among us.json");
+var trainer = memoryengine.CreateTrainerFromFile("among us.amber");
 
 // Local Access with Password
-var trainer = memoryengine.CreateTrainerFromFile("among us.json", "password");
+var trainer = memoryengine.CreateTrainerFromFile("among us.amber", "password");
 
 // Remote Access with URL
-var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json");
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.amber");
 
 // Remote Access with URL and Password
-var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password");
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.amber", "password");
 
 // Remote Access with URL, Password, Username and User Password (Http Basic Auth)
-var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password", "username", "userpass");
+var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.amber", "password", "username", "userpass");
 
 
 
