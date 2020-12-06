@@ -88,6 +88,8 @@ The defined variable will only be available in the same procedures.
 `version` will be FileVersion from properties of the game file. It will allow running if the version is the same, otherwise, it will return an exception. If you don't want to use this feature, use "all" in the field.
 
 #### Prefix:
+You must add the prefix or your command won't work normally.
+
 - All defined variables by aobScan: `?` (Ex: `{{?PlayerControl_GetData}}`)
 - All defined variables by offsets: `#` (Ex: `{{#ShowGhosts}}`)
 - All defined variables in procedures: `@` (Ex: `{{@readedInt}}`)
