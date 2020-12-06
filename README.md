@@ -16,6 +16,9 @@ This project is under development. Do not use for production.
 ```cs
 var memoryengine = new MemoryJSON.Engine();
 
+// Encrypt AmberJSON file
+memoryengine.EncryptFile("among us.json", "password");
+
 // Local Access
 var trainer = memoryengine.CreateTrainerFromFile("among us.json");
 
@@ -30,6 +33,8 @@ var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.jso
 
 // Remote Access with URL, Password, Username and User Password (Http Basic Auth)
 var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.json", "password", "username", "userpass");
+
+
 
 // Inject to the Game Process. (Boolean Type)
 trainer.Inject2Game();
