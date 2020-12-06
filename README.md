@@ -1,6 +1,8 @@
 # MemoryJSON.NET
 Memory I/O Engine with JSON Files
 
+This project using the modified Memory.dll as a main I/O engine.
+
 This library will allow you to create trainers very easily with JSON files, without working on codes.
 
 This project is under development. Do not use for production.
