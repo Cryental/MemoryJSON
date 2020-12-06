@@ -95,9 +95,6 @@ The defined variable will only be available in the same procedures.
 
 #### Example:
 ```json
-AmberJSON Format 2.2
-Complied Data For MemoryJSON
-
 {
   "name": "Among Us",
   "description": "Trainer for Among Us",
