@@ -78,30 +78,33 @@ For the `function` field, it supports almost all features from Memory.dll. For r
 ```
 The defined variable will only be available in the same procedures.
 
-#### Example:
-
 `version` will be FileVersion from properties of the game file. It will allow running if the version is the same, otherwise, it will return an exception. If you don't want to use this feature, use "all" in the field.
 
+#### Prefix:
+- All defined variables by aobScan: `?` (Ex: `{{?PlayerControl_GetData}}`)
+- All defined variables by offsets: `#` (Ex: `{{#ShowGhosts}}`)
+- SetValue Prefix: `{{$customValue}}`
+
+#### Example:
 ```json
 {
   "name": "Among Us",
   "description": "Trainer for Among Us",
   "processName": "Among Us",
   "version": "2019.4.9.65162",
-  "preprocessing": [
+  "offsets": [
     {
-      "type": "variable",
-      "name": "Offset_ShowGhosts",
+      "name": "ShowGhosts",
       "value": "GameAssembly.dll+20E7BB"
     },
     {
-      "type": "variable",
-      "name": "Offset_MovementSpeed",
+      "name": "MovementSpeed",
       "value": "GameAssembly.dll+00DA9DE4,24,20,5C,24,14"
-    },
+    }
+  ],
+  "aobScan": [
     {
-      "type": "aobscan",
-      "name": "AoB_PlayerControl_GetData",
+      "name": "PlayerControl_GetData",
       "value": "55 8B EC 80 3D EC C8 ??",
       "startAddress": "",
       "endAddress": "",
@@ -124,9 +127,9 @@ The defined variable will only be available in the same procedures.
               "procedures": [
                 {
                   "function": "WriteMemory",
-                  "address": "{{Offset_ShowGhosts}}",
+                  "address": "{{#ShowGhosts}}",
                   "type": "bytes",
-                  "value": "80 7F 29 05 0F 85"
+                  "value": "{{?PlayerControl_GetData}}"
                 }
               ]
             },
@@ -134,9 +137,9 @@ The defined variable will only be available in the same procedures.
               "procedures": [
                 {
                   "function": "WriteMemory",
-                  "address": "{{Offset_ShowGhosts}}",
+                  "address": "{{#ShowGhosts}}",
                   "type": "bytes",
-                  "value": "80 7F 29 00 0F 84"
+                  "value": "{{?PlayerControl_GetData}}"
                 }
               ]
             }
@@ -147,9 +150,9 @@ The defined variable will only be available in the same procedures.
               "procedures": [
                 {
                   "function": "WriteMemory",
-                  "address": "{{Offset_MovementSpeed}}",
+                  "address": "{{#MovementSpeed}}",
                   "type": "float",
-                  "value": "{{#customValue#}}"
+                  "value": "{{$customValue}}"
                 }
               ]
             }
@@ -160,14 +163,14 @@ The defined variable will only be available in the same procedures.
               "procedures": [
                 {
                   "function": "CreateCodeCave",
-                  "address": "GameAssembly.dll+6EE35B",
-                  "newBytes": "C7 44 06 10 00 00 80 7F F3 0F 10 44 06 10",
+                  "address": "GameAssembly.dll+6EE",
+                  "newBytes": "C7 44 06 10 00 00 80",
                   "replaceCount": 6,
                   "size": 4096
                 },
                 {
                   "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE55A",
+                  "address": "GameAssembly.dll+6EE5",
                   "type": "bytes",
                   "value": "72 12"
                 }
@@ -177,13 +180,13 @@ The defined variable will only be available in the same procedures.
               "procedures": [
                 {
                   "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE55A",
+                  "address": "GameAssembly.dll+6EE5",
                   "type": "bytes",
                   "value": "F3 0F 10 44 86 10 A1"
                 },
                 {
                   "function": "WriteMemory",
-                  "address": "GameAssembly.dll+6EE35B",
+                  "address": "GameAssembly.dll+6EE3",
                   "type": "bytes",
                   "value": "75 12"
                 }
