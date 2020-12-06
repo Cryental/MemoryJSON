@@ -69,7 +69,7 @@ This engine uses AmberJSON as the script format. (*.amber)
 
 For the `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
 
-```json
+```
 {
   "function": "ReadInt",
   "defineName": "readedInt",
@@ -94,6 +94,9 @@ The defined variable will only be available in the same procedures.
 
 #### Example:
 ```json
+AmberJSON Format 2.2
+Complied Data For MemoryJSON
+
 {
   "name": "Among Us",
   "description": "Trainer for Among Us",
