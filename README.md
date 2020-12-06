@@ -66,14 +66,14 @@ For the `function` field, it supports almost all features from Memory.dll. For r
 ```json
 {
   "function": "ReadInt",
-  "name": "readedInt",
+  "defineName": "readedInt",
   "address": "address"
 },
 {
   "function": "WriteMemory",
   "address": "Game.dll+6E",
   "type": "int",
-  "value": "{{readedInt}}"
+  "value": "{{@readedInt}}"
 }
 ```
 The defined variable will only be available in the same procedures.
@@ -83,6 +83,7 @@ The defined variable will only be available in the same procedures.
 #### Prefix:
 - All defined variables by aobScan: `?` (Ex: `{{?PlayerControl_GetData}}`)
 - All defined variables by offsets: `#` (Ex: `{{#ShowGhosts}}`)
+- All defined variables in procedures: `@` (Ex: `{{@readedInt}}`)
 - SetValue Prefix: `{{$customValue}}`
 
 #### Example:
