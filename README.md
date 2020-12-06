@@ -77,7 +77,7 @@ The defined variable will only be available in the same procedures.
 
 #### Example:
 
-`version` will be FileVersion from properties of the game file.
+`version` will be FileVersion from properties of the game file. It will allow running if the version is the same, otherwise, it will return an exception. If you don't want to use this feature, use "all" in the field.
 
 ```json
 {
