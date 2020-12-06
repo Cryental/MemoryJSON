@@ -65,7 +65,7 @@ trainer.GenerateEXE("filePath", "customBackgroundImagePath");
 
 ### AmberJSON Format:
 
-This engine uses AmberJSON as the script format. `(*.amber)`
+This engine uses AmberJSON as the script format. (*.amber)
 
 For the `function` field, it supports almost all features from Memory.dll. For read memory functions, you will need to use it like:
 
