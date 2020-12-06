@@ -64,6 +64,7 @@ For `function` field, it supports almost features from Memory.dll. For read memo
   "value": "{{readedInt}}"
 }
 ```
+The defined variable will only available in the same procedures.
 
 #### Example:
 ```json
