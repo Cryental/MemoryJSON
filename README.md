@@ -5,6 +5,11 @@ This project using the modified Memory.dll as a main I/O engine.
 
 This library will allow you to create trainers very easily with JSON files, without working on codes.
 
+#### Warning!
+Please do not use this library for multi player games. I created this library to create single player trainers easily. You will get banned if you use it in multi player and it's your own risk.
+
+Example offsets are all dummy, it won't work in real game.
+
 This project is under development. Do not use for production.
 
 ### How to Use:
