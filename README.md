@@ -142,7 +142,7 @@ The defined variable will only be available in the same procedures.
                   "function": "WriteMemory",
                   "address": "{{Offset_MovementSpeed}}",
                   "type": "float",
-                  "value": "{customValue}"
+                  "value": "{{#customValue#}}"
                 }
               ]
             }
