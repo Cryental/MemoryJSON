@@ -76,11 +76,15 @@ For the `function` field, it supports almost all features from Memory.dll. For r
 The defined variable will only be available in the same procedures.
 
 #### Example:
+
+`version` will be FileVersion from properties of the game file.
+
 ```json
 {
   "name": "Among Us",
   "description": "Trainer for Among Us",
   "processName": "Among Us",
+  "version": "2019.4.9.65162"
   "preprocessing": [
     {
       "type": "variable",
