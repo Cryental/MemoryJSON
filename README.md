@@ -37,10 +37,14 @@ var functions = trainer.GetAllFunctions();
 // Returns String with boolean, float, int, etc. You can use Enable and Disable for boolean type, and use SetValve for other number types.
 var getFunctionType = functions["Show Ghosts"].GetType(); 
 
-trainer.SearchFunction("MovementSpeed").SetValve("1");
+// Get Tab
+var generalTrainers = trainer.FindTab("General");
 
-trainer.SearchFunction("Show Ghosts").Enable();
-trainer.SearchFunction("Show Ghosts").Disable();
+// Use Functions
+generalTrainers.SearchFunction("Movement Speed").SetValve("1");
+
+generalTrainers.SearchFunction("Show Ghosts").Enable();
+generalTrainers.SearchFunction("Show Ghosts").Disable();
 ```
 
 ### JSON Scripting Format:
