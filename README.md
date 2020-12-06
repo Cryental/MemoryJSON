@@ -1,4 +1,4 @@
-# MemoryJSON.NET
+# MemoryJSON
 Memory I/O Engine with JSON Files
 
 This project using the modified Memory.dll as a main I/O engine.
