@@ -43,7 +43,7 @@ trainer.SearchFunction("Show Ghosts").Enable();
 trainer.SearchFunction("Show Ghosts").Disable();
 ```
 
-### JSON Format:
+### JSON Scripting Format:
 ```json
 {
   "name": "Among Us",
@@ -75,42 +75,85 @@ trainer.SearchFunction("Show Ghosts").Disable();
     }
   ],
   "trainers": [
-    {
-      "name": "Show Ghosts",
-      "enable": {
-        "triggers": [
+    [
+      {
+        "tabName": "General",
+        "functions": [
           {
-            "function": "WriteMemory",
-            "address": "{{Offset_ShowGhosts}}",
-            "type": "bytes",
-            "value": "80 7F 29 05 0F 85"
-          }
-        ]
-      },
-      "disable": {
-        "triggers": [
+            "name": "Show Ghosts",
+            "enabled": {
+              "triggers": [
+                {
+                  "function": "WriteMemory",
+                  "address": "{{Offset_ShowGhosts}}",
+                  "type": "bytes",
+                  "value": "80 7F 29 05 0F 85"
+                }
+              ]
+            },
+            "disabled": {
+              "triggers": [
+                {
+                  "function": "WriteMemory",
+                  "address": "{{Offset_ShowGhosts}}",
+                  "type": "bytes",
+                  "value": "80 7F 29 00 0F 84"
+                }
+              ]
+            }
+          },
           {
-            "function": "WriteMemory",
-            "address": "{{Offset_ShowGhosts}}",
-            "type": "bytes",
-            "value": "80 7F 29 00 0F 84"
+            "name": "Movement Speed",
+            "setValue": {
+              "triggers": [
+                {
+                  "function": "WriteMemory",
+                  "address": "{{Offset_MovementSpeed}}",
+                  "type": "float",
+                  "value": "{customValue}"
+                }
+              ]
+            }
+          },
+          {
+            "name": "Infinity Kill Range",
+            "enabled": {
+              "triggers": [
+                {
+                  "function": "CreateCodeCave",
+                  "address": "GameAssembly.dll+6EE35B",
+                  "newBytes": "C7 44 06 10 00 00 80 7F F3 0F 10 44 06 10",
+                  "replaceCount": 6,
+                  "size": 4096
+                },
+                {
+                  "function": "WriteMemory",
+                  "address": "GameAssembly.dll+6EE55A",
+                  "type": "bytes",
+                  "value": "72 12"
+                }
+              ]
+            },
+            "disabled": {
+              "triggers": [
+                {
+                  "function": "WriteMemory",
+                  "address": "GameAssembly.dll+6EE55A",
+                  "type": "bytes",
+                  "value": "F3 0F 10 44 86 10 A1"
+                },
+                {
+                  "function": "WriteMemory",
+                  "address": "GameAssembly.dll+6EE35B",
+                  "type": "bytes",
+                  "value": "75 12"
+                }
+              ]
+            }
           }
         ]
       }
-    },
-    {
-      "name": "Movement Speed",
-      "setValue": {
-        "triggers": [
-          {
-            "function": "WriteMemory",
-            "address": "{{Offset_MovementSpeed}}",
-            "type": "float",
-            "value": "{customValue}"
-          }
-        ]
-      }
-    }
+    ]
   ]
 }
 ```
