@@ -48,6 +48,24 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
 ```
 
 ### JSON Scripting Format:
+
+For `function` field, it supports almost features from Memory.dll. For read memory functions, you will need to use it like:
+
+```json
+{
+  "function": "ReadInt",
+  "name": "readedInt",
+  "address": "address"
+},
+{
+  "function": "WriteMemory",
+  "address": "Game.dll+6E",
+  "type": "int",
+  "value": "{{readedInt}}"
+}
+```
+
+#### Example:
 ```json
 {
   "name": "Among Us",
@@ -86,7 +104,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
           {
             "name": "Show Ghosts",
             "enabled": {
-              "triggers": [
+              "procedures": [
                 {
                   "function": "WriteMemory",
                   "address": "{{Offset_ShowGhosts}}",
@@ -96,7 +114,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
               ]
             },
             "disabled": {
-              "triggers": [
+              "procedures": [
                 {
                   "function": "WriteMemory",
                   "address": "{{Offset_ShowGhosts}}",
@@ -109,7 +127,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
           {
             "name": "Movement Speed",
             "setValue": {
-              "triggers": [
+              "procedures": [
                 {
                   "function": "WriteMemory",
                   "address": "{{Offset_MovementSpeed}}",
@@ -122,7 +140,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
           {
             "name": "Infinity Kill Range",
             "enabled": {
-              "triggers": [
+              "procedures": [
                 {
                   "function": "CreateCodeCave",
                   "address": "GameAssembly.dll+6EE35B",
@@ -139,7 +157,7 @@ generalTrainers.SearchFunction("Show Ghosts").Disable();
               ]
             },
             "disabled": {
-              "triggers": [
+              "procedures": [
                 {
                   "function": "WriteMemory",
                   "address": "GameAssembly.dll+6EE55A",
