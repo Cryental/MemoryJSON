@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryJSON", "MemoryJSON\Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memory.dll", "Memory.dll\Memory.dll.csproj", "{820DB426-D9B8-4FBD-9AC7-3AE5EF6DA92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryJSON.Test", "MemoryJSON.Test\MemoryJSON.Test.csproj", "{C44F6DE4-CBF2-4842-B120-FC0BE8BB215D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{820DB426-D9B8-4FBD-9AC7-3AE5EF6DA92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{820DB426-D9B8-4FBD-9AC7-3AE5EF6DA92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{820DB426-D9B8-4FBD-9AC7-3AE5EF6DA92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44F6DE4-CBF2-4842-B120-FC0BE8BB215D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44F6DE4-CBF2-4842-B120-FC0BE8BB215D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44F6DE4-CBF2-4842-B120-FC0BE8BB215D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44F6DE4-CBF2-4842-B120-FC0BE8BB215D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
