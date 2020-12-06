@@ -84,7 +84,7 @@ The defined variable will only be available in the same procedures.
   "name": "Among Us",
   "description": "Trainer for Among Us",
   "processName": "Among Us",
-  "version": "2019.4.9.65162"
+  "version": "2019.4.9.65162",
   "preprocessing": [
     {
       "type": "variable",
