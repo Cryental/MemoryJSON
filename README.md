@@ -40,9 +40,10 @@ var trainer = memoryengine.CreateTrainerFromURL("http://example.com/among us.amb
 // Inject to the Game Process. (Boolean Type)
 trainer.Inject2Game();
 
-// Run pre-processing table. It's required to run. (Boolean Type)
+// It's required to run with Inject2Game always. 
+// If it returns false, you cannot use any functions.
 // It can cause some lags and delay if you need to scan AoB. Please use async method in your code. 
-trainer.RunPreProcessing();
+trainer.InitEngine();
 
 // Get Tab
 var generalTrainers = trainer.FindTab("General");
