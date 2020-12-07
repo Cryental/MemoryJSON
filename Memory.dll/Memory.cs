@@ -1800,11 +1800,39 @@ public class Mem
 #if WINXP
 #else
     public UIntPtr CreateCodeCave(string code,
-        byte[] newBytes,
+        string write,
         int replaceCount,
         int size = 0x1000,
         string file = "")
     {
+        byte[] newBytes;
+
+        if (write.Contains(",") || write.Contains(" "))
+        {
+            string[] stringBytes;
+            if (write.Contains(","))
+            {
+                stringBytes = write.Split(',');
+            }
+            else
+            {
+                stringBytes = write.Split(' ');
+            }
+
+            var c = stringBytes.Count();
+            newBytes = new byte[c];
+            for (var i = 0; i < c; i++)
+            {
+                newBytes[i] = Convert.ToByte(stringBytes[i], 16);
+            }
+        }
+        else
+        {
+            newBytes = new byte[1];
+            newBytes[0] = Convert.ToByte(write, 16);
+        }
+
+
         if (replaceCount < 5)
         {
             return UIntPtr.Zero;
