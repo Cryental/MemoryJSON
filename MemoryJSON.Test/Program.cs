@@ -14,11 +14,12 @@ namespace MemoryJSON.Test
                 
             var trainer = memoryengine.CreateTrainerFromFile("among us.amber");
 
+            Console.WriteLine(trainer.Info.Author);
             trainer.Inject2Game();
             trainer.InitializeAoB();
 
             var generalTrainers = trainer.FindTab("General");
-            Console.WriteLine(generalTrainers.SearchFunction("Movement Speed").SetValue("6"));
+            Console.WriteLine(generalTrainers.SearchFunction("Infinity Sabotage").Enable());
 
             Console.ReadKey();
         }

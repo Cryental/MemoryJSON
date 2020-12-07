@@ -12,6 +12,9 @@ namespace MemoryJSON.AmberJSON
         {
             "FreezeValue",
             "UnfreezeValue",
+            "WriteMemory",
+            "CreateCodeCave",
+
             "ReadBytes",
             "ReadFloat",
             "ReadString",
@@ -25,11 +28,9 @@ namespace MemoryJSON.AmberJSON
             "ReadPByte",
             "ReadPFloat",
             "ReadPString",
-            "WriteMemory",
             "WriteMove",
             "WriteBytes",
             "WriteBits",
-            "CreateCodeCave",
             "FindFreeBlockForRegion"
         };
 

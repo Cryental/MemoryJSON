@@ -29,7 +29,7 @@ namespace MemoryJSON
         {
             _mainData = JObject.Parse(jsonData);
 
-            Info = new Info {Name = (string) _mainData.name, Description = (string) _mainData.description};
+            Info = new Info {Name = (string) _mainData.name, Description = (string) _mainData.description, Author = (string) _mainData.author, Website = (string) _mainData.website};
 
             _processName = (string) _mainData.processName;
             _version = (string) _mainData.version;
