@@ -48,6 +48,11 @@ namespace MemoryJSON
 
         public bool SetValue(string value)
         {
+            if (_sharedMemory == null)
+            {
+                return false;
+            }
+
             if (_sharedFunctionData.setValue == null)
             {
                 return false;
@@ -75,6 +80,11 @@ namespace MemoryJSON
 
         public bool Enable()
         {
+            if (_sharedMemory == null)
+            {
+                return false;
+            }
+
             if (_sharedFunctionData.enabled == null)
             {
                 return false;
@@ -102,6 +112,11 @@ namespace MemoryJSON
 
         public bool Disable()
         {
+            if (_sharedMemory == null)
+            {
+                return false;
+            }
+
             if (_sharedFunctionData.disabled == null)
             {
                 return false;
@@ -129,6 +144,11 @@ namespace MemoryJSON
 
         private void ProcedureHandler(dynamic procedureItem, string setValue = "")
         {
+            if (_sharedMemory == null)
+            {
+                return;
+            }
+
             var functionName = (string) procedureItem.function;
 
             if (!WordDict.SupportedFunctions.Contains(functionName))
@@ -160,6 +180,27 @@ namespace MemoryJSON
                         var size = (int)procedureItem.size;
 
                         _sharedMemory.CreateCodeCave(address, newBytes, replaceCount, size);
+                    }
+
+                    break;
+                case "FreezeValue":
+                    if (procedureItem.address != null && procedureItem.type != null && procedureItem.value != null &&
+                        WordDict.SupportedTypes.Contains((string)procedureItem.type))
+                    {
+                        var address = ParseSpecificCodes((string)procedureItem.address, setValue);
+                        var type = ParseSpecificCodes((string)procedureItem.type, setValue);
+                        var value = ParseSpecificCodes((string)procedureItem.value, setValue);
+
+                        _sharedMemory.FreezeValue(address, type, value);
+                    }
+
+                    break;
+                case "UnfreezeValue":
+                    if (procedureItem.address != null)
+                    {
+                        var address = ParseSpecificCodes((string)procedureItem.address, setValue);
+
+                        _sharedMemory.UnfreezeValue(address);
                     }
 
                     break;
