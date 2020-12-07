@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MemoryJSON
 {
@@ -30,6 +31,26 @@ namespace MemoryJSON
             }
 
             return tempList;
+        }
+
+        public FunctionHandler SearchFunction(string functionName)
+        {
+            dynamic foundFunction = null;
+
+            foreach (var function in _sharedTabData)
+            {
+                if ((string) function.name == functionName)
+                {
+                    foundFunction = function;
+                }
+            }
+
+            if (foundFunction == null)
+            {
+                throw new Exception("Nothing found with the specified name.");
+            }
+
+            return new FunctionHandler(_sharedMemory, _offsets, _aobScannedValues, foundFunction);
         }
     }
 }

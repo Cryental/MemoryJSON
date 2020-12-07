@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AmberJSON\Helpers.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="FunctionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs\AoBScan.cs" />
     <Compile Include="Structs\Info.cs" />

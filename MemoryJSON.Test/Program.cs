@@ -18,7 +18,7 @@ namespace MemoryJSON.Test
             trainer.InitializeAoB();
 
             var generalTrainers = trainer.FindTab("General");
-            Console.WriteLine(string.Join(", ", generalTrainers.GetAllFunctions().ToArray()));
+            generalTrainers.SearchFunction("Show Ghosts");
 
             Console.ReadKey();
         }
