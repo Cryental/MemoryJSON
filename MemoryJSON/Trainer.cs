@@ -135,5 +135,25 @@ namespace MemoryJSON
 
             return true;
         }
+
+        public TabHandler FindTab(string tabName)
+        {
+            dynamic foundTab = null;
+
+            foreach (var tab in _mainData.trainers)
+            {
+                if (tab.tabName == tabName)
+                {
+                    foundTab = tab.functions;
+                }
+            }
+
+            if (foundTab == null)
+            {
+                throw new Exception("Nothing found with the specified name.");
+            }
+
+            return new TabHandler(_memory, _offsets, _aobScannedValues, foundTab);
+        }
     }
 }
