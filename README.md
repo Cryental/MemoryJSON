@@ -100,6 +100,8 @@ You must add the prefix or your command won't work normally.
 {
   "name": "Among Us",
   "description": "Trainer for Among Us",
+  "author": "",
+  "website": "",
   "processName": "Among Us",
   "version": "2019.4.9.5308042",
   "offsets": [
