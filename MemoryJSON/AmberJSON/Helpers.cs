@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using Newtonsoft.Json.Linq;
 
 namespace MemoryJSON.AmberJSON
@@ -72,7 +74,7 @@ namespace MemoryJSON.AmberJSON
                 case "@":
                     return "local";
                 case "$":
-                    return "setvalue";
+                    return "setValue";
                 default:
                     return "none";
             }
@@ -87,10 +89,20 @@ namespace MemoryJSON.AmberJSON
         {
             if (str.StartsWith("{{") && str.EndsWith("}}"))
             {
-                return str.Substring(3, str.Length - 5);
+                return RemoveSpecialCharacters(str.Substring(3, str.Length - 5));
             }
 
             return null;
+        }
+
+        private static string RemoveSpecialCharacters(string str)
+        {
+            var sb = new StringBuilder();
+            foreach (var c in str.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_'))
+            {
+                sb.Append(c);
+            }
+            return sb.ToString();
         }
 
         internal static bool IsValidJson(string strInput)

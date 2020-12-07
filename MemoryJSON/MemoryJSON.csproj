@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmberJSON\Helpers.cs" />
+    <Compile Include="AmberJSON\WordDict.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="FunctionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

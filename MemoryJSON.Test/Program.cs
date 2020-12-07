@@ -18,7 +18,7 @@ namespace MemoryJSON.Test
             trainer.InitializeAoB();
 
             var generalTrainers = trainer.FindTab("General");
-            Console.WriteLine(generalTrainers.SearchFunction("Movement Speesd").GetType().ToString());
+            generalTrainers.SearchFunction("Ignore Walls").Disable();
 
             Console.ReadKey();
         }
