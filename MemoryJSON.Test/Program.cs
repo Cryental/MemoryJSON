@@ -15,6 +15,7 @@ namespace MemoryJSON.Test
             var trainer = memoryengine.CreateTrainerFromFile("among us.amber");
 
             Console.WriteLine(trainer.Inject2Game());
+            Console.WriteLine(trainer.InitializeAoB());
             Console.WriteLine(trainer.Info.Name);
             Console.ReadKey();
         }

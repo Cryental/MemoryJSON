@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json.Linq;
 
@@ -36,6 +35,18 @@ namespace MemoryJSON.AmberJSON
             try
             {
                 return (int) new Int32Converter().ConvertFromString(hexCode);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        internal static long ConvertFromHexStringToInt64(string hexCode)
+        {
+            try
+            {
+                return (long) new Int64Converter().ConvertFromString(hexCode);
             }
             catch
             {

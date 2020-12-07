@@ -12,8 +12,9 @@ namespace MemoryJSON.Structs
         internal string Value { get; set; }
         internal string StartAddress { get; set; }
         internal string EndAddress { get; set; }
+        internal bool Readable { get; set; }
         internal bool Writable { get; set; }
         internal bool Executable { get; set; }
-        internal List<string> Regions { get; set; }
+        internal int[] Regions { get; set; }
     }
 }
