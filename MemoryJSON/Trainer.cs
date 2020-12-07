@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Security.Principal;
 using MemoryJSON.Structs;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +17,10 @@ namespace MemoryJSON
 
         private readonly string _processName;
         private readonly string _version;
+
         public readonly Info Info;
+
+        private Mem _memory;
 
         public Trainer(string jsonData)
         {
@@ -55,6 +61,45 @@ namespace MemoryJSON
                         Regions = regionList
                     });
             }
+        }
+
+        public bool Inject2Game()
+        {
+            // Administrator Only
+            using (var identity = WindowsIdentity.GetCurrent())
+            {
+                var principal = new WindowsPrincipal(identity);
+
+                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+                {
+                    return false;
+                }
+            }
+
+            // Search Process
+            // Multiple Instances Not Allowed
+            if (Process.GetProcessesByName(_processName).Length != 1)
+            {
+                return false;
+            }
+
+            // If value is "all" or empty, do not check the game version.
+            if (string.IsNullOrEmpty(_version) || string.IsNullOrWhiteSpace(_version) || _version != "all")
+            {
+                var process = Process.GetProcessesByName(_processName).FirstOrDefault();
+                var filePath = process.MainModule.FileName;
+
+                var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
+                var version = versionInfo.FileVersion;
+
+                if (!string.IsNullOrEmpty(version) && version != _version)
+                {
+                    return false;
+                }
+            }
+
+            _memory = new Mem();
+            return _memory.OpenProcess(_processName);
         }
     }
 }
