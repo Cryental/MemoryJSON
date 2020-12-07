@@ -118,6 +118,7 @@ You must add the prefix or your command won't work normally.
       "value": "55 8B EC 80 3D EC C8 ??",
       "startAddress": "",
       "endAddress": "",
+      "readable": true,
       "writable": false,
       "executable": false,
       "regions": [
