@@ -43,7 +43,7 @@ trainer.Inject2Game();
 // It's required to run with Inject2Game always. 
 // If it returns false, you cannot use any functions.
 // It can cause some lags and delay if you need to scan AoB. Please use async method in your code. 
-trainer.InitEngine();
+trainer.InitializeAoB();
 
 // Get Tab
 var generalTrainers = trainer.FindTab("General");
