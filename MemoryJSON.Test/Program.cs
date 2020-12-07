@@ -18,7 +18,7 @@ namespace MemoryJSON.Test
             trainer.InitializeAoB();
 
             var generalTrainers = trainer.FindTab("General");
-            generalTrainers.SearchFunction("Ignore Walls").Disable();
+            generalTrainers.SearchFunction("Infinity Kill Range").Enable();
 
             Console.ReadKey();
         }

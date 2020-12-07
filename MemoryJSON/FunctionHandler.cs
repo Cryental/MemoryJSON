@@ -113,6 +113,18 @@ namespace MemoryJSON
                     }
 
                     break;
+                case "CreateCodeCave":
+                    if (procedureItem.address != null && procedureItem.newBytes != null && procedureItem.replaceCount != null && procedureItem.size != null)
+                    {
+                        var address = ParseSpecificCodes((string)procedureItem.address);
+                        var newBytes = ParseSpecificCodes((string)procedureItem.newBytes);
+                        var replaceCount = (int)procedureItem.replaceCount;
+                        var size = (int)procedureItem.size;
+
+                        _sharedMemory.CreateCodeCave(address, newBytes, replaceCount, size);
+                    }
+
+                    break;
             }
         }
 
