@@ -43,7 +43,7 @@ trainer.Inject2Game();
 // It's required to run with Inject2Game always. 
 // If it returns false, you cannot use any functions.
 // It can cause some lags and delay if you need to scan AoB. Please use async method in your code. 
-trainer.InitEngine();
+trainer.InitializeAoB();
 
 // Get Tab
 var generalTrainers = trainer.FindTab("General");
@@ -101,7 +101,7 @@ You must add the prefix or your command won't work normally.
   "name": "Among Us",
   "description": "Trainer for Among Us",
   "processName": "Among Us",
-  "version": "2019.4.9.65162",
+  "version": "2019.4.9.5308042",
   "offsets": [
     {
       "name": "ShowGhosts",
@@ -118,6 +118,7 @@ You must add the prefix or your command won't work normally.
       "value": "55 8B EC 80 3D EC C8 ??",
       "startAddress": "",
       "endAddress": "",
+      "readable": true,
       "writable": false,
       "executable": false,
       "regions": [
