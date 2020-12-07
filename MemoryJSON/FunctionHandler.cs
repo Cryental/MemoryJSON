@@ -46,9 +46,41 @@ namespace MemoryJSON
             return FunctionType.Unknown;
         }
 
+        public bool SetValue(string value)
+        {
+            if (_sharedFunctionData.setValue == null)
+            {
+                return false;
+            }
+
+            if (GetType() != FunctionType.SetValue)
+            {
+                return false;
+            }
+
+            foreach (var procedure in _sharedFunctionData.setValue.procedures)
+            {
+                try
+                {
+                    ProcedureHandler(procedure, value);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return true;
+        }
+
         public bool Enable()
         {
             if (_sharedFunctionData.enabled == null)
+            {
+                return false;
+            }
+
+            if (GetType() != FunctionType.Toggle)
             {
                 return false;
             }
@@ -71,6 +103,11 @@ namespace MemoryJSON
         public bool Disable()
         {
             if (_sharedFunctionData.disabled == null)
+            {
+                return false;
+            }
+
+            if (GetType() != FunctionType.Toggle)
             {
                 return false;
             }
@@ -109,6 +146,7 @@ namespace MemoryJSON
                         var type = ParseSpecificCodes((string) procedureItem.type, setValue);
                         var value = ParseSpecificCodes((string) procedureItem.value, setValue);
 
+                        Console.WriteLine(address + "|" + type + "|" + value);
                         _sharedMemory.WriteMemory(address, type, value);
                     }
 

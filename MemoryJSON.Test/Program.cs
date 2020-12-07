@@ -18,7 +18,7 @@ namespace MemoryJSON.Test
             trainer.InitializeAoB();
 
             var generalTrainers = trainer.FindTab("General");
-            generalTrainers.SearchFunction("Infinity Kill Range").Enable();
+            Console.WriteLine(generalTrainers.SearchFunction("Movement Speed").SetValue("6"));
 
             Console.ReadKey();
         }
