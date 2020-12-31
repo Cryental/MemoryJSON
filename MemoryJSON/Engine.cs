@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MemoryJSON.AmberJSON;
 
 namespace MemoryJSON
 {
@@ -13,12 +10,41 @@ namespace MemoryJSON
         {
             var readFile = File.ReadAllText(filePath);
 
-            if (!AmberJSON.Helpers.IsValidJson(readFile))
-            {
+            if (!Helpers.IsValidJson(readFile))
                 throw new Exception("The imported file is corrupted or not supported file.");
-            }
 
             return new Trainer(readFile);
+        }
+
+        public Trainer CreateTrainerFromFile(string filePath, string password)
+        {
+            var readFile = File.ReadAllBytes(filePath);
+
+            var decryptedFile = Encryption.Decrypt(readFile, password);
+
+            if (decryptedFile == "ERROR_501622")
+                throw new Exception("The password you entered is invalid or incorrect.");
+
+            if (!Helpers.IsValidJson(decryptedFile))
+                throw new Exception("The imported file is corrupted or not supported file.");
+
+            return new Trainer(decryptedFile);
+        }
+
+        public void EncryptFile(string sourceFilePath, string descFilePath, string password)
+        {
+            var readFile = File.ReadAllText(sourceFilePath);
+
+            try
+            {
+                var encryptedFile = Encryption.Encrypt(readFile, password);
+
+                File.WriteAllBytes(descFilePath, encryptedFile);
+            }
+            catch
+            {
+                throw new Exception("There was a problem while encrypting the file.");
+            }
         }
     }
 }
