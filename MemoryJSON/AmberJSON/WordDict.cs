@@ -14,7 +14,6 @@ namespace MemoryJSON.AmberJSON
             "UnfreezeValue",
             "WriteMemory",
             "CreateCodeCave",
-
             "ReadBytes",
             "ReadFloat",
             "ReadString",
@@ -24,14 +23,7 @@ namespace MemoryJSON.AmberJSON
             "ReadLong",
             "Read2Byte",
             "ReadBits",
-            "ReadByte",
-            "ReadPByte",
-            "ReadPFloat",
-            "ReadPString",
-            "WriteMove",
-            "WriteBytes",
-            "WriteBits",
-            "FindFreeBlockForRegion"
+            "ReadByte"
         };
 
         internal static List<string> SupportedTypes = new List<string>()

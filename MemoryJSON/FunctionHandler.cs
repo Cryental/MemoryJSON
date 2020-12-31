@@ -28,6 +28,7 @@ namespace MemoryJSON
             {
                 Console.WriteLine(item.Key);
             }
+
             _dynamicDefinedValues = new Dictionary<string, dynamic>();
         }
 
@@ -165,8 +166,7 @@ namespace MemoryJSON
                         var address = ParseSpecificCodes((string) procedureItem.address, setValue);
                         var type = ParseSpecificCodes((string) procedureItem.type, setValue);
                         var value = ParseSpecificCodes((string) procedureItem.value, setValue);
-
-                        Console.WriteLine(address + "|" + type + "|" + value);
+                        
                         _sharedMemory.WriteMemory(address, type, value);
                     }
 
@@ -201,6 +201,96 @@ namespace MemoryJSON
                         var address = ParseSpecificCodes((string)procedureItem.address, setValue);
 
                         _sharedMemory.UnfreezeValue(address);
+                    }
+
+                    break;
+                case "ReadBytes":
+                    if (procedureItem.defineName != null && procedureItem.address != null && procedureItem.length != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadBytes(procedureItem.address, procedureItem.length);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadFloat":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadFloat(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadString":
+                    if (procedureItem.defineName != null && procedureItem.address != null && procedureItem.length != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadString(procedureItem.address, "", procedureItem.length);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadDouble":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadDouble(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadUIntPtr":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadUIntPtr(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadInt":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadInt(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadLong":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadLong(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "Read2Byte":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.Read2Byte(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadBits":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadBits(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
+                    }
+
+                    break;
+                case "ReadByte":
+                    if (procedureItem.defineName != null && procedureItem.address != null)
+                    {
+                        var searchedValue = _sharedMemory.ReadByte(procedureItem.address);
+
+                        _dynamicDefinedValues.Add(procedureItem.defineName, searchedValue);
                     }
 
                     break;
