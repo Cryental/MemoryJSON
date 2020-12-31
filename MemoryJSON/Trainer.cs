@@ -12,6 +12,7 @@ namespace MemoryJSON
     public class Trainer
     {
         private readonly Dictionary<string, AoBScan> _aobScan;
+        private readonly Dictionary<string, string> _aobScannedValues;
 
         private readonly dynamic _mainData;
 
@@ -21,7 +22,6 @@ namespace MemoryJSON
         private readonly string _version;
 
         public readonly Info Info;
-        private readonly Dictionary<string, string> _aobScannedValues;
 
         private Mem _memory;
 
@@ -29,17 +29,18 @@ namespace MemoryJSON
         {
             _mainData = JObject.Parse(jsonData);
 
-            Info = new Info {Name = (string) _mainData.name, Description = (string) _mainData.description, Author = (string) _mainData.author, Website = (string) _mainData.website};
+            Info = new Info
+            {
+                Name = (string) _mainData.name, Description = (string) _mainData.description,
+                Author = (string) _mainData.author, Website = (string) _mainData.website
+            };
 
             _processName = (string) _mainData.processName;
             _version = (string) _mainData.version;
 
             _offsets = new Dictionary<string, string>();
 
-            foreach (var item in _mainData.offsets)
-            {
-                _offsets.Add((string) item.name, (string) item.value);
-            }
+            foreach (var item in _mainData.offsets) _offsets.Add((string) item.name, (string) item.value);
 
             _aobScan = new Dictionary<string, AoBScan>();
 
@@ -48,9 +49,7 @@ namespace MemoryJSON
                 var regionList = new List<int>();
 
                 foreach (var region in item.regions)
-                {
                     regionList.Add(Helpers.ConvertFromHexStringToInt32((string) region));
-                }
 
                 _aobScan.Add((string) item.name,
                     new AoBScan
@@ -76,18 +75,12 @@ namespace MemoryJSON
             {
                 var principal = new WindowsPrincipal(identity);
 
-                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
-                {
-                    return false;
-                }
+                if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return false;
             }
 
             // Search Process
             // Multiple Instances Not Allowed
-            if (Process.GetProcessesByName(_processName).Length != 1)
-            {
-                return false;
-            }
+            if (Process.GetProcessesByName(_processName).Length != 1) return false;
 
             // If value is "all" or empty, do not check the game version.
             if (string.IsNullOrEmpty(_version) || string.IsNullOrWhiteSpace(_version) || _version != "all")
@@ -98,10 +91,7 @@ namespace MemoryJSON
                 var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
                 var version = versionInfo.FileVersion;
 
-                if (!string.IsNullOrEmpty(version) && version != _version)
-                {
-                    return false;
-                }
+                if (!string.IsNullOrEmpty(version) && version != _version) return false;
             }
 
             _memory = new Mem();
@@ -110,10 +100,7 @@ namespace MemoryJSON
 
         public bool InitializeAoB()
         {
-            if (_memory == null)
-            {
-                return false;
-            }
+            if (_memory == null) return false;
 
             foreach (var item in _aobScan)
             {
@@ -128,10 +115,7 @@ namespace MemoryJSON
                 _aobScannedValues.Add(name, scannedArray.Length > 0 ? $"0x{scannedArray.FirstOrDefault():X}" : "0x0");
             }
 
-            foreach (var item in _aobScannedValues)
-            {
-                Console.WriteLine(item.Key + "|" + item.Value);
-            }
+            foreach (var item in _aobScannedValues) Console.WriteLine(item.Key + "|" + item.Value);
 
             return true;
         }
@@ -141,17 +125,10 @@ namespace MemoryJSON
             dynamic foundTab = null;
 
             foreach (var tab in _mainData.trainers)
-            {
                 if (tab.tabName == tabName)
-                {
                     foundTab = tab.functions;
-                }
-            }
 
-            if (foundTab == null)
-            {
-                throw new Exception("Nothing found with the specified name.");
-            }
+            if (foundTab == null) throw new Exception("Nothing found with the specified name.");
 
             return new TabHandler(_memory, _offsets, _aobScannedValues, foundTab);
         }

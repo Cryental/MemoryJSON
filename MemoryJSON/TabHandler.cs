@@ -25,10 +25,7 @@ namespace MemoryJSON
         {
             var tempList = new List<string>();
 
-            foreach (var item in _sharedTabData)
-            {
-                tempList.Add((string) item.name);
-            }
+            foreach (var item in _sharedTabData) tempList.Add((string) item.name);
 
             return tempList;
         }
@@ -38,17 +35,10 @@ namespace MemoryJSON
             dynamic foundFunction = null;
 
             foreach (var function in _sharedTabData)
-            {
                 if ((string) function.name == functionName)
-                {
                     foundFunction = function;
-                }
-            }
 
-            if (foundFunction == null)
-            {
-                throw new Exception("Nothing found with the specified name.");
-            }
+            if (foundFunction == null) throw new Exception("Nothing found with the specified name.");
 
             return new FunctionHandler(_sharedMemory, _offsets, _aobScannedValues, foundFunction);
         }

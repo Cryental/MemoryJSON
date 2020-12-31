@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MemoryJSON.AmberJSON
 {
     internal static class WordDict
     {
-        internal static List<string> SupportedFunctions = new List<string>()
+        internal static List<string> SupportedFunctions = new List<string>
         {
             "FreezeValue",
             "UnfreezeValue",
@@ -26,7 +22,7 @@ namespace MemoryJSON.AmberJSON
             "ReadByte"
         };
 
-        internal static List<string> SupportedTypes = new List<string>()
+        internal static List<string> SupportedTypes = new List<string>
         {
             "float",
             "int",

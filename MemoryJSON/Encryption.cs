@@ -66,7 +66,7 @@ namespace MemoryJSON
                     Mode = CipherMode.CBC,
                     Key = Encoding.GetBytes(key)
                 };
-                
+
                 var base64DecodedStr = Encoding.GetString(byteText);
 
                 var ser = new JavaScriptSerializer();

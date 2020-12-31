@@ -8,11 +8,11 @@ namespace MemoryJSON
     public class FunctionHandler
     {
         private readonly Dictionary<string, string> _aobScannedValues;
+
+        private readonly Dictionary<string, dynamic> _dynamicDefinedValues;
         private readonly Dictionary<string, string> _offsets;
         private readonly dynamic _sharedFunctionData;
         private readonly Mem _sharedMemory;
-
-        private readonly Dictionary<string, dynamic> _dynamicDefinedValues;
 
         public FunctionHandler(Mem sharedMemory,
             Dictionary<string, string> offsets,
@@ -24,48 +24,29 @@ namespace MemoryJSON
             _aobScannedValues = aobScannedValues;
             _sharedFunctionData = sharedFunctionData;
 
-            foreach (var item in _offsets)
-            {
-                Console.WriteLine(item.Key);
-            }
+            foreach (var item in _offsets) Console.WriteLine(item.Key);
 
             _dynamicDefinedValues = new Dictionary<string, dynamic>();
         }
 
         public new FunctionType GetType()
         {
-            if (_sharedFunctionData.setValue != null)
-            {
-                return FunctionType.SetValue;
-            }
+            if (_sharedFunctionData.setValue != null) return FunctionType.SetValue;
 
-            if (_sharedFunctionData.enabled != null && _sharedFunctionData.disabled != null)
-            {
-                return FunctionType.Toggle;
-            }
+            if (_sharedFunctionData.enabled != null && _sharedFunctionData.disabled != null) return FunctionType.Toggle;
 
             return FunctionType.Unknown;
         }
 
         public bool SetValue(string value)
         {
-            if (_sharedMemory == null)
-            {
-                return false;
-            }
+            if (_sharedMemory == null) return false;
 
-            if (_sharedFunctionData.setValue == null)
-            {
-                return false;
-            }
+            if (_sharedFunctionData.setValue == null) return false;
 
-            if (GetType() != FunctionType.SetValue)
-            {
-                return false;
-            }
+            if (GetType() != FunctionType.SetValue) return false;
 
             foreach (var procedure in _sharedFunctionData.setValue.procedures)
-            {
                 try
                 {
                     ProcedureHandler(procedure, value);
@@ -74,30 +55,19 @@ namespace MemoryJSON
                 {
                     Console.WriteLine(e);
                 }
-            }
 
             return true;
         }
 
         public bool Enable()
         {
-            if (_sharedMemory == null)
-            {
-                return false;
-            }
+            if (_sharedMemory == null) return false;
 
-            if (_sharedFunctionData.enabled == null)
-            {
-                return false;
-            }
+            if (_sharedFunctionData.enabled == null) return false;
 
-            if (GetType() != FunctionType.Toggle)
-            {
-                return false;
-            }
+            if (GetType() != FunctionType.Toggle) return false;
 
             foreach (var procedure in _sharedFunctionData.enabled.procedures)
-            {
                 try
                 {
                     ProcedureHandler(procedure);
@@ -106,30 +76,19 @@ namespace MemoryJSON
                 {
                     Console.WriteLine(e);
                 }
-            }
 
             return true;
         }
 
         public bool Disable()
         {
-            if (_sharedMemory == null)
-            {
-                return false;
-            }
+            if (_sharedMemory == null) return false;
 
-            if (_sharedFunctionData.disabled == null)
-            {
-                return false;
-            }
+            if (_sharedFunctionData.disabled == null) return false;
 
-            if (GetType() != FunctionType.Toggle)
-            {
-                return false;
-            }
+            if (GetType() != FunctionType.Toggle) return false;
 
             foreach (var procedure in _sharedFunctionData.disabled.procedures)
-            {
                 try
                 {
                     ProcedureHandler(procedure);
@@ -138,24 +97,17 @@ namespace MemoryJSON
                 {
                     Console.WriteLine(e);
                 }
-            }
 
             return true;
         }
 
         private void ProcedureHandler(dynamic procedureItem, string setValue = "")
         {
-            if (_sharedMemory == null)
-            {
-                return;
-            }
+            if (_sharedMemory == null) return;
 
             var functionName = (string) procedureItem.function;
 
-            if (!WordDict.SupportedFunctions.Contains(functionName))
-            {
-                return;
-            }
+            if (!WordDict.SupportedFunctions.Contains(functionName)) return;
 
             switch (functionName)
             {
@@ -166,18 +118,19 @@ namespace MemoryJSON
                         var address = ParseSpecificCodes((string) procedureItem.address, setValue);
                         var type = ParseSpecificCodes((string) procedureItem.type, setValue);
                         var value = ParseSpecificCodes((string) procedureItem.value, setValue);
-                        
+
                         _sharedMemory.WriteMemory(address, type, value);
                     }
 
                     break;
                 case "CreateCodeCave":
-                    if (procedureItem.address != null && procedureItem.newBytes != null && procedureItem.replaceCount != null && procedureItem.size != null)
+                    if (procedureItem.address != null && procedureItem.newBytes != null &&
+                        procedureItem.replaceCount != null && procedureItem.size != null)
                     {
-                        var address = ParseSpecificCodes((string)procedureItem.address);
-                        var newBytes = ParseSpecificCodes((string)procedureItem.newBytes);
-                        var replaceCount = (int)procedureItem.replaceCount;
-                        var size = (int)procedureItem.size;
+                        var address = ParseSpecificCodes((string) procedureItem.address);
+                        var newBytes = ParseSpecificCodes((string) procedureItem.newBytes);
+                        var replaceCount = (int) procedureItem.replaceCount;
+                        var size = (int) procedureItem.size;
 
                         _sharedMemory.CreateCodeCave(address, newBytes, replaceCount, size);
                     }
@@ -185,11 +138,11 @@ namespace MemoryJSON
                     break;
                 case "FreezeValue":
                     if (procedureItem.address != null && procedureItem.type != null && procedureItem.value != null &&
-                        WordDict.SupportedTypes.Contains((string)procedureItem.type))
+                        WordDict.SupportedTypes.Contains((string) procedureItem.type))
                     {
-                        var address = ParseSpecificCodes((string)procedureItem.address, setValue);
-                        var type = ParseSpecificCodes((string)procedureItem.type, setValue);
-                        var value = ParseSpecificCodes((string)procedureItem.value, setValue);
+                        var address = ParseSpecificCodes((string) procedureItem.address, setValue);
+                        var type = ParseSpecificCodes((string) procedureItem.type, setValue);
+                        var value = ParseSpecificCodes((string) procedureItem.value, setValue);
 
                         _sharedMemory.FreezeValue(address, type, value);
                     }
@@ -198,14 +151,15 @@ namespace MemoryJSON
                 case "UnfreezeValue":
                     if (procedureItem.address != null)
                     {
-                        var address = ParseSpecificCodes((string)procedureItem.address, setValue);
+                        var address = ParseSpecificCodes((string) procedureItem.address, setValue);
 
                         _sharedMemory.UnfreezeValue(address);
                     }
 
                     break;
                 case "ReadBytes":
-                    if (procedureItem.defineName != null && procedureItem.address != null && procedureItem.length != null)
+                    if (procedureItem.defineName != null && procedureItem.address != null &&
+                        procedureItem.length != null)
                     {
                         var searchedValue = _sharedMemory.ReadBytes(procedureItem.address, procedureItem.length);
 
@@ -223,7 +177,8 @@ namespace MemoryJSON
 
                     break;
                 case "ReadString":
-                    if (procedureItem.defineName != null && procedureItem.address != null && procedureItem.length != null)
+                    if (procedureItem.defineName != null && procedureItem.address != null &&
+                        procedureItem.length != null)
                     {
                         var searchedValue = _sharedMemory.ReadString(procedureItem.address, "", procedureItem.length);
 
@@ -324,7 +279,9 @@ namespace MemoryJSON
                 {
                     var variableName = Helpers.GetStringFromCode(target);
 
-                    outputString = _dynamicDefinedValues.ContainsKey(target) ? (string) _dynamicDefinedValues[variableName] : "";
+                    outputString = _dynamicDefinedValues.ContainsKey(target)
+                        ? (string) _dynamicDefinedValues[variableName]
+                        : "";
 
                     break;
                 }
