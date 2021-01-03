@@ -10,8 +10,6 @@ Please do not use this library for multi player games. I created this library to
 
 Example offsets are all dummy offsets, they won't work in the real game.
 
-This project is under development. Do not use for production.
-
 ### How to Use:
 ```cs
 var memoryengine = new MemoryJSON.Engine();
