@@ -56,10 +56,6 @@ generalTrainers.SearchFunction("Movement Speed").SetValve("1");
 
 generalTrainers.SearchFunction("Show Ghosts").Enable();
 generalTrainers.SearchFunction("Show Ghosts").Disable();
-
-// Create Executable File (Not available yet, under development)
-trainer.GenerateEXE("filePath");
-trainer.GenerateEXE("filePath", "customBackgroundImagePath");
 ```
 
 ### AmberJSON Format:
