@@ -7,10 +7,10 @@ namespace MemoryJSON
     {
         private readonly Dictionary<string, string> _aobScannedValues;
         private readonly Dictionary<string, string> _offsets;
-        private readonly Mem _sharedMemory;
+        private readonly Mem.Mem _sharedMemory;
         private readonly dynamic _sharedTabData;
 
-        public TabHandler(Mem sharedMemory,
+        public TabHandler(Mem.Mem sharedMemory,
             Dictionary<string, string> offsets,
             Dictionary<string, string> aobScannedValues,
             dynamic sharedTabData)

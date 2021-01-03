@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MemoryJSON;
 using MemoryJSON.Structs;
 
 namespace MemoryJSON
@@ -12,9 +11,9 @@ namespace MemoryJSON
         private readonly Dictionary<string, dynamic> _dynamicDefinedValues;
         private readonly Dictionary<string, string> _offsets;
         private readonly dynamic _sharedFunctionData;
-        private readonly Mem _sharedMemory;
+        private readonly Mem.Mem _sharedMemory;
 
-        public FunctionHandler(Mem sharedMemory,
+        public FunctionHandler(Mem.Mem sharedMemory,
             Dictionary<string, string> offsets,
             Dictionary<string, string> aobScannedValues,
             dynamic sharedFunctionData)
@@ -51,7 +50,7 @@ namespace MemoryJSON
                 {
                     ProcedureHandler(procedure, value);
                 }
-                catch (Exception e)
+                catch
                 {
                     return false;
                 }

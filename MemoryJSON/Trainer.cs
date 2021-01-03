@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Principal;
-using MemoryJSON;
 using MemoryJSON.Structs;
 using Newtonsoft.Json.Linq;
 
@@ -23,49 +22,58 @@ namespace MemoryJSON
 
         public readonly Info Info;
 
-        private Mem _memory;
+        private Mem.Mem _memory;
 
         public Trainer(string jsonData)
         {
-            _mainData = JObject.Parse(jsonData);
-
-            Info = new Info
+            try
             {
-                Name = (string) _mainData.name, Description = (string) _mainData.description,
-                Author = (string) _mainData.author, Website = (string) _mainData.website
-            };
+                _mainData = JObject.Parse(jsonData);
 
-            _processName = (string) _mainData.processName;
-            _version = (string) _mainData.version;
+                Info = new Info
+                {
+                    Name = (string) _mainData.name,
+                    Description = (string) _mainData.description,
+                    Author = (string) _mainData.author,
+                    Website = (string) _mainData.website
+                };
 
-            _offsets = new Dictionary<string, string>();
+                _processName = (string) _mainData.processName;
+                _version = (string) _mainData.version;
 
-            foreach (var item in _mainData.offsets) _offsets.Add((string) item.name, (string) item.value);
+                _offsets = new Dictionary<string, string>();
 
-            _aobScan = new Dictionary<string, AoBScan>();
+                foreach (var item in _mainData.offsets) _offsets.Add((string) item.name, (string) item.value);
 
-            foreach (var item in _mainData.aobScan)
-            {
-                var regionList = new List<int>();
+                _aobScan = new Dictionary<string, AoBScan>();
 
-                foreach (var region in item.regions)
-                    regionList.Add(Helpers.ConvertFromHexStringToInt32((string) region));
+                foreach (var item in _mainData.aobScan)
+                {
+                    var regionList = new List<int>();
 
-                _aobScan.Add((string) item.name,
-                    new AoBScan
-                    {
-                        Name = (string) item.name,
-                        Value = (string) item.value,
-                        StartAddress = (string) item.startAddress,
-                        EndAddress = (string) item.endAddress,
-                        Readable = (bool) item.readable,
-                        Writable = (bool) item.writable,
-                        Executable = (bool) item.executable,
-                        Regions = regionList.ToArray()
-                    });
+                    foreach (var region in item.regions)
+                        regionList.Add(Helpers.ConvertFromHexStringToInt32((string) region));
+
+                    _aobScan.Add((string) item.name,
+                        new AoBScan
+                        {
+                            Name = (string) item.name,
+                            Value = (string) item.value,
+                            StartAddress = (string) item.startAddress,
+                            EndAddress = (string) item.endAddress,
+                            Readable = (bool) item.readable,
+                            Writable = (bool) item.writable,
+                            Executable = (bool) item.executable,
+                            Regions = regionList.ToArray()
+                        });
+                }
+
+                _aobScannedValues = new Dictionary<string, string>();
             }
-
-            _aobScannedValues = new Dictionary<string, string>();
+            catch
+            {
+                throw new Exception("This AmberJSON file is corrupted. Please check the format first.");
+            }
         }
 
         public bool Inject2Game()
@@ -94,7 +102,7 @@ namespace MemoryJSON
                 if (!string.IsNullOrEmpty(version) && version != _version) return false;
             }
 
-            _memory = new Mem();
+            _memory = new Mem.Mem();
             return _memory.OpenProcess(_processName);
         }
 
