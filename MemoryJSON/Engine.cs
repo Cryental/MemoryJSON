@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using MemoryJSON.AmberJSON;
+using MemoryJSON;
 
 namespace MemoryJSON
 {
@@ -118,9 +118,6 @@ namespace MemoryJSON
                     .DownloadData(url);
 
                 var decryptedFile = Encryption.Decrypt(loadedFile, password);
-
-                if (decryptedFile == "ERROR_501622")
-                    throw new Exception("The password you entered is invalid or incorrect.");
 
                 if (!Helpers.IsValidJson(decryptedFile))
                     throw new Exception("The imported file is corrupted or not supported file.");

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MemoryJSON.AmberJSON
+namespace MemoryJSON
 {
     internal static class WordDict
     {

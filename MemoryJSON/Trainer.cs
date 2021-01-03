@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Principal;
-using MemoryJSON.AmberJSON;
+using MemoryJSON;
 using MemoryJSON.Structs;
 using Newtonsoft.Json.Linq;
 

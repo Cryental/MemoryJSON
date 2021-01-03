@@ -81,7 +81,7 @@ namespace MemoryJSON
             }
             catch
             {
-                return "ERROR_501622";
+                throw new Exception("There was a problem while decrypting the file.");
             }
         }
 

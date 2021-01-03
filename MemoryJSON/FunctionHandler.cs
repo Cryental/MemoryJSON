@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MemoryJSON.AmberJSON;
+using MemoryJSON;
 using MemoryJSON.Structs;
 
 namespace MemoryJSON
@@ -53,7 +53,7 @@ namespace MemoryJSON
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    return false;
                 }
 
             return true;
@@ -72,9 +72,9 @@ namespace MemoryJSON
                 {
                     ProcedureHandler(procedure);
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.WriteLine(e);
+                    return false;
                 }
 
             return true;
@@ -93,9 +93,9 @@ namespace MemoryJSON
                 {
                     ProcedureHandler(procedure);
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.WriteLine(e);
+                    return false;
                 }
 
             return true;

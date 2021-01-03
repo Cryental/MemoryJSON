@@ -56,8 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encryption.cs" />
-    <Compile Include="AmberJSON\Helpers.cs" />
-    <Compile Include="AmberJSON\WordDict.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="WordDict.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="FunctionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,9 +76,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Encryption\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

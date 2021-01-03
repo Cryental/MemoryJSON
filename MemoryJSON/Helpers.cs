@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace MemoryJSON.AmberJSON
+namespace MemoryJSON
 {
     internal static class Helpers
     {
@@ -68,11 +68,6 @@ namespace MemoryJSON.AmberJSON
                 default:
                     return "none";
             }
-        }
-
-        internal static bool IsValidSpecialCode(string str)
-        {
-            return str.StartsWith("{{") && str.EndsWith("}}") && GetTypeFromString(str) != "none";
         }
 
         internal static string GetStringFromCode(string str)
